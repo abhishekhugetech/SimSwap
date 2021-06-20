@@ -47,7 +47,7 @@ def reverse2wholeimage(swaped_imgs, mats, crop_size, oriimg, logoclass, save_pat
     for img_mask, target_image in zip(img_mask_list, target_image_list):
         img = img_mask * target_image + (1-img_mask) * img
 
-    final_img = logoclass.apply_frames(img.astype(np.uint8))
+    final_img = img.astype(np.uint8)
     cv2.imwrite(save_path, final_img)
 
     # cv2.imwrite('E:\\lny\\SimSwap-main\\output\\img_div.jpg', img * 255)
