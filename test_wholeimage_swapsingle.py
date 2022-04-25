@@ -11,6 +11,7 @@ from options.test_options import TestOptions
 from insightface_func.face_detect_crop_single import Face_detect_crop
 from util.reverse2original import reverse2wholeimage
 import os
+import sys
 from util.add_watermark import watermark_image
 
 def lcm(a, b): return abs(a * b) / fractions.gcd(a, b) if a and b else 0
@@ -60,7 +61,11 @@ if __name__ == '__main__':
 
     pic_b = opt.pic_b_path
     img_b_whole = cv2.imread(pic_b)
-    img_b_align_crop, b_mat = app.get(img_b_whole,crop_size)
+    face_detection_result = app.get(img_b_whole,crop_size)
+    if face_detection_result == None:
+      print("Face not detected on target image.")
+      sys.exit(0)
+    img_b_align_crop, b_mat = face_detection_result
 
     img_b_align_crop_list, b_mat_list = app.get(img_b_whole,crop_size)
     # detect_results = None
